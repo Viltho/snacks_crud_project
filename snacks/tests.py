@@ -49,7 +49,25 @@ class SnackTests(TestCase):
         self.assertTemplateUsed(response, 'snack_details.html')
         self.assertTemplateUsed(response, 'base.html')
 
-    def test_detail_page_context(self):
+    def test_create_page_template(self):
+        url = reverse('snack_create')
+        response = self.client.get(url)
+        self.assertTemplateUsed(response, 'snack_create.html')
+        self.assertTemplateUsed(response, 'base.html')
+
+    def test_delete_page_template(self):
+        url = reverse('snack_delete',args=(1,))
+        response = self.client.get(url)
+        self.assertTemplateUsed(response, 'snack_delete.html')
+        self.assertTemplateUsed(response, 'base.html')
+        
+    def test_update_page_template(self):
+        url = reverse('snack_update',args=(1,))
+        response = self.client.get(url)
+        self.assertTemplateUsed(response, 'snack_update.html')
+        self.assertTemplateUsed(response, 'base.html')
+
+    def test_snack_create_page_context(self):
         url = reverse('snack_details',args=(1,))
         response = self.client.get(url)
         snack = response.context['snack']
@@ -64,5 +82,27 @@ class SnackTests(TestCase):
         }
 
         url = reverse('snack_create')
+        response = self.client.post(path=url,data=obj,follow=True)
+        self.assertRedirects(response, "/snacks/")
+        
+    def test_update_view(self):
+        obj={
+            'name':"test2",
+            'description': "info...",
+            'purchaser': self.purchaser.id
+        }
+
+        url = reverse('snack_update', args=(1,))
+        response = self.client.post(path=url,data=obj,follow=True)
+        self.assertRedirects(response, "/snacks/")
+        
+    def test_delete_view(self):
+        obj={
+            'name':"test2",
+            'description': "info...",
+            'purchaser': self.purchaser.id
+        }
+
+        url = reverse('snack_delete', args=(1,))
         response = self.client.post(path=url,data=obj,follow=True)
         self.assertRedirects(response, "/snacks/")
