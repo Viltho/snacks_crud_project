@@ -1,0 +1,33 @@
+
+{% extends "base.html"%}
+{% load crispy_forms_tags %}
+
+{% block content%}
+    <div class="bg-white">
+        <div class="flex px-6 pt-0 lg:px-48">
+
+        <div class="mx-auto  sm:py-48 lg:py-48">
+            <div class="sm:mb-8 sm:flex sm:justify-center">
+                {% comment %} <img style='scale: 0.5' src='https://viltho.netlify.app/images/personal-picture.jpg' alt='Abdullah'/> {% endcomment %}
+            </div>
+            <div class='flex items-center'>
+                <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Snack List</h1>
+                <a href="{% url 'snack_create'%}"><button class='btn btn-success'>Create a new Item</button></a>
+            </div>
+            {% for snack in snacks%}
+            <div class='flex items-center justify-between'>
+                <div class="text-center">
+                    <h1 class="text-4xl font-bold tracking-tight text-gray-900">{{snack.name}}</h1>
+                    {% comment %} <p class="mt-6 text-lg leading-8 text-gray-600">I am a full-stack web developer.</p> {% endcomment %}
+                </div>
+                <div class='flex justify-around'>
+                    <a href="{% url 'snack_details' snack.pk%}"><button class='btn btn-success'>Details</button></a>
+                    <a href="{% url 'snack_update' snack.pk%}"><button class='btn btn-alert'>Update</button></a>
+                    <a href="{% url 'snack_delete' snack.pk%}"><button class='btn btn-danger'>Delete</button></a>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+        </div>
+    </div>
+{% endblock content%}

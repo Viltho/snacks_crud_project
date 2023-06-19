@@ -1,0 +1,23 @@
+{% extends "base.html"%}
+
+{% block content%}
+    <div class="bg-white">
+        <div class="flex px-6 pt-14 lg:px-8">
+
+        <div class="mx-auto  sm:py-48 lg:py-18">
+            <div class="sm:mb-8 sm:flex sm:justify-center">
+                <div class="flex-col items-center justify-center">
+                    <h1 class="text-5xl">Snack Details</h1>
+                    <h2>Name: {{snack.name}}</h2>
+                    <hr>
+                    <p>Description: {{snack.description}}</p>
+                    <hr>
+                    <p>Purchaser: {{snack.purchaser}}</p>
+                    <a href={% url 'snacks'%}><button class='btn btn-success'>Go back</button></a>
+                </div>
+                
+            </div>
+        </div>
+        </div>
+    </div>
+{% endblock content%}

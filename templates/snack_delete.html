@@ -1,0 +1,22 @@
+{% extends "base.html"%}
+
+{% load crispy_forms_tags %}
+
+{% block content%}
+    <div class="bg-white">
+        <div class="flex px-6 pt-14 lg:px-8">
+            <div class="mx-auto  sm:py-48 lg:py-18">
+                <h1>Delete this snack!</h1>
+
+                <form method="post">
+                    {% csrf_token %}
+            
+                    <h3>Are you sure you want to delete {{snack.name}}</h3>
+                    
+                    <a href="{% url 'snacks' %}"><button type='submit' class='btn btn-danger'>Delete</button></a>
+                </form>
+                <a href="{% url 'snacks' %}"><button class='btn btn-success'>Cancel</button></a>
+            </div>
+        </div>
+    </div>
+{% endblock content%}
